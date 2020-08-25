@@ -1,5 +1,44 @@
 # Git, Python & Conda Guide
 
+- **[Git](#git)**
+  - [Overview](#overview)
+  - [Installation](#installation)
+    - [Prerequisites](#prerequisites)
+    - [PC](#pc)
+      - [Command Line Version](#command-line-version)
+      - [GUI Version](#gui-version)
+    - [Mac](#mac)
+      - [Command Line Version](#command-line-version-1)
+        - [Option A](#option-a)
+        - [Option B](#option-b)
+      - [GUI Version](#gui-version-1)
+  - [Use](#use)
+    - [Creating a Repo](#creating-a-repo)
+    - [Cloning a Repo](#cloning-a-repo)
+      - [GUI](#gui)
+      - [Command Line](#command-line)
+    - [Editing a Repo](#editing-a-repo)
+      - [GUI](#gui-1)
+      - [Command Line](#command-line-1)
+- **[Python](#python)**
+  - [Overview](#overview-1)
+  - [Installation](#installation-1)
+    - [PC](#pc-1)
+    - [Mac](#mac-1)
+- **[PIP](#pip)**
+  - [Overview](#overview-2)
+  - [Installation](#installation-2)
+  - [Use](#use-1)
+- **[CONDA](#conda)**
+  - [Overview](#overview-3)
+  - [Installation](#installation-3)
+    - [PC](#pc-2)
+    - [Mac](#mac-2)
+  - [Use](#use-2)
+
+
+
+
 ## Git
 
 ### Overview
@@ -149,7 +188,43 @@ If you want changes made locally to your repo to be pushed to the online version
 
 ##### GUI
 
-1. Open Github Desktop and select your **repo**
+1. Open Github Desktop and select your **repo**. Under the *Uncommitted Changes* tab you will see the changes you have made to the files in the repo since the last commit. Red lines indicate code that has been deleted, green indicates code that has been added/modified.
+
+![uncommitted changes](./uncommittedChanges.png)
+
+2. To **commit** your changes, add a summary and description of the changes you've made, then click *Commit to Master*
+
+![commit message](./commitMessage.png)
+
+3. To **push** your changes to the online **repo**, click 'Sync' on the top right corner.
+
+##### Command Line
+
+1. Open **Terminal** (on Mac) or **Git Bash** (on Windows).
+
+2. Navigate to your git repo using the `cd` command
+
+3. Use the following command to *add* all files to your commit
+```
+git add .
+```
+
+![git added](./gitAdded.png)
+
+
+4. Use the following command to *commit* the changes, with a message describing the changes
+```
+git commit -m "enter the message here"
+```
+
+![git committed](./gitCommitted.png)
+
+5. Use the following command to *push* the commit to your GitHub account
+```
+git push
+```
+
+![git pushed](./gitPushed.png)
 
 
 ## Python
@@ -162,9 +237,42 @@ Python is a popular, high-level coding language used widely in Machine Learning 
 
 #### PC
 
+1. Download and run the executable file from the [Python website](Windows x86-64 executable installer) to install Python on your computer. 
+	* **NB: Make sure that you check the box for 'Add Python 3.7 to PATH' on the first window when you start to install - see image below
+	* **Note**: The above link is for Python 3.7. The newest version is 3.8, but I have had trouble running Tensorflow and PyTorch projects using Python 3.8, so I recommend downloading 3.7
+
+	![python path](./python.png)
+
+2. Open **Git Bash** and run the following command to check if Python has been successfully installed:
+```
+python --version
+```
+
+If it returns something like 'The command python is not recognised' then Python is ***not*** installed successfully.
+
 #### Mac
 
-### Use
+The most recent version of Python 2 should already be installed on your Mac by default. Open **Terminal** and run the following command to ensure Python is installed:
+```
+python --version
+```
+
+If it returns something like 'the command python is not recognised', then Python is ***not*** installed.
+
+To install Python:
+1. Install Homebrew (if you have not already installed it as described above) by running the following command in **Terminal**:
+
+```
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+```
+
+2. Install Python using Homebrew using the following command in **Terminal**;
+```
+brew install python@3.7
+```
+
+3. Run `python --version` again to confirm that Python has been installed (if it does not work, try restarting Terminal and running the command again).
+
 
 
 ## PIP
@@ -175,12 +283,33 @@ Python is a popular, high-level coding language used widely in Machine Learning 
 
 ### Installation
 
-#### PC
 
-#### Mac
+**PIP** should be installed automatically along with **Python**. Confirm that **PIP** is installed by running the following command in **Terminal** (on Mac) or **Git Bash** (on Windows):
+```
+pip --version
+```
 
 ### Use
 
+To install a Python Package using PIP run the following command in **Terminal** (on Mac) or **Git Bash** (on Windows):
+```
+pip install package-name
+```
+
+To install a *specific version* of a Python Package using PIP run the following command:
+```
+pip install package-name==1.0.0
+```
+
+To search for a specific Python Package using PIP run the following command:
+```
+pip search package-name
+```
+
+To list the Python Packages that have been installed in your current environment run the following command:
+```
+pip list
+```
 
 ## CONDA
 
@@ -188,12 +317,77 @@ Python is a popular, high-level coding language used widely in Machine Learning 
 
 Anaconda/Miniconda is a platform for creating enclosed environments for running Python projects. 
 
-Conda allows us to run multiple projects on the same computer with different versions of Python or different versions of specific Python packages. Many existing repos on Github will require different versions of Python or specific Python packages, and Conda can allow us to run these projects more easily.
+Conda allows us to run multiple projects on the same computer with different versions of Python or different versions of specific Python packages. Many existing repos on Github will require different versions of Python or specific Python packages, and Conda can allow us to run these projects more easily on the same device. When you enter a Conda environment, any packages installed via Conda or PIP will only exist in that environment. When that environment is deactivated, the installed packages will not be available.
 
 ### Installation
 
 #### PC
 
+1. Download and run the [Miniconda Installation File](https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe)
+2. Open the **Git Bash** application and run one of the following commands to test if Conda has installed correctly (you may need to restart your computer if it returns an error):
+```
+conda --version
+```
+```
+conda --info
+```
+
 #### Mac
 
+1. Download and run the [Miniconda Installation File](https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh)
+2. Open **Terminal** and run one of the following commands to test if Conda has installed correctly (you may need to restart your computer if it returns an error):
+```
+conda --version
+```
+```
+conda --info
+```
+
 ### Use
+
+See the [Conda Cheat Sheet](https://kapeli.com/cheat_sheets/Conda.docset/Contents/Resources/Documents/index) for a full list of commands
+
+All of these commands are to be run in **Terminal** (on Mac) or **Git Bash** (on PC).
+
+- Create a new Conda environment (**Note: you can name your environment whatever you like**):
+```
+conda create -n environmentName
+```
+
+- List the Conda environments that you have created:
+```
+conda info -e
+```
+
+
+- Activate a Conda environment after creating it:
+```
+conda activate environmentName
+```
+
+- Deactivate the currently activated Conda environment:
+```
+conda deactivate
+```
+
+**The following commands should only be run when you are in an active Conda environment:**
+
+- Install Conda packages using the following command:
+```
+conda install package-name
+```
+
+- Install a specific version of a Conda package:
+```
+conda install package-name==1.0
+```
+
+- Search for a specific Conda package:
+```
+conda search package-name
+```
+
+- List the Conda packages installed in the current active Conda environment:
+```
+conda list
+```
