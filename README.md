@@ -391,3 +391,85 @@ conda search package-name
 ```
 conda list
 ```
+
+
+## Realtime Voice Cloning
+
+[Repo Link](https://github.com/CorentinJ/Real-Time-Voice-Cloning)
+
+1. Open **Git Bash** and clone the repo to your computer's `Documents` folder using the following commands in this order:
+```
+cd Documents
+```
+```
+git clone https://github.com/CorentinJ/Real-Time-Voice-Cloning
+```
+```
+cd Real-Time-Voice-Cloning
+```
+
+2. If you do not aready have it installed, download **Cuda 10.1** from [here](https://developer.nvidia.com/cuda-10.1-download-archive-base?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exelocal) using the settings shown in the image below:
+
+![cuda settings](./cudaPage.png)
+
+3. Install Python **virtualenv** using pip with the following command in **Git Bash**:
+```
+pip install virtualenv
+```
+
+4. Create a virtualenv inside the repo folder using the following command in **Git Bash**:
+```
+virtualenv env
+```
+
+This creates an environment where any new packages installed will only be used when the environment is activated, similar to Conda above.
+
+6. **Active the environment** using the following command in **Git Bash**
+```
+. env/Scripts/activate
+```
+If you've come this far successfully and the environment is successfully activated, any new lines in **Git Bash** will be preceded by the environment name `(env)`, and **Git Bash** should look something like the image below:
+
+![environment activated](./envActivated.png)
+
+4. Install **PyTorch** by running following command in **Git Bash**:
+```
+pip install torch==1.6.0+cu101 torchvision==0.7.0+cu101 -f https://download.pytorch.org/whl/torch_stable.html
+```
+
+If the above command doesn't work, it may be because you have a different version of Cuda installed. In this case, visit [this page](https://pytorch.org/get-started/locally/) and enter the settings applicable to your machine.
+
+5. Install the other packages required for the repo by running the following command in **Git Bash**
+```
+pip install requirements.txt
+```
+
+This should install all of the packages in the requirements.txt file. I had trouble with this, so i had to install them individually! If you also have trouble, try running the below command instead:
+```
+pip install tensorflow==1.15 umap-learn visdom librosa matplotlib numpy scipy tqdm sounddevice SoundFile Unidecode inflect PyQt5 multiprocess numba==0.48
+```
+
+6. Download the [pretrained models](https://github.com/CorentinJ/Real-Time-Voice-Cloning/wiki/Pretrained-models). The unzipped folder will contain three subfolders - `encoder`, `synthesizer`, and `vocoder`. Copy the contents of these folders into the folders with the same names in the repo.
+
+7. ***Optional*** Download the LibriSpeech dataset from [here](http://www.openslr.org/resources/12/train-clean-100.tar.gz). Create a new folder inside the `Real-Time-Voice_cloning` repo folder, then extract the contents of the downloaded dataset to `Real-Time-Voice-Cloning/Datasets/LibriSpeech/train-clean-100`
+**NOTE**: If you do not download this dataset you can use your own audio files or record directly into the GUI to generate audio.
+
+8. ***Finally*** **launch the Toolbox**.
+If you have downloaded the dataset run the following command:
+```
+python demo_toolbox.py -d Datasets
+```
+
+If you have **not** downloaded the dataset, run the following command:
+```
+python demo_toolbox.py
+```
+
+You should see the following window open: 
+![toolbox](./toolbox.png)
+
+
+- Click on **Browse** to upload an audio file from your computer of someone speaking, to replicate this voice. If you have downloaded the dataset, you can click **Load** to load an audio file from the dataset.
+- Enter the text you would like to have synthesized in the textbox and click **Synthesize and vocode**. 
+- When synthesis and vocoding is complete, you will hear the generated audio play. 
+- To save the audio, click **Export**
